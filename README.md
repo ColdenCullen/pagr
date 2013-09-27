@@ -10,4 +10,4 @@ Using pagr is incredibly simple; simple create a div (or section or what have yo
 In your HTML page, include the css and js files. Then, in your onload function, call pagr(). It's that simple!
 
 ### Examples
-Want to see pagr in action? Take a trip over to [node.coldencullen.com](http://node.coldencullen.com/) and check it out. The main page uses the horizontal pagination, and the projects section uses a vertical one.
+Want to see pagr in action? Take a trip over to [node.coldencullen.com](http://node.coldencullen.com/) (which is SUPER in development) and check it out. The main page uses the horizontal pagination, and the projects section uses a vertical one.
