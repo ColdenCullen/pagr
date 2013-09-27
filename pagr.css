@@ -1,4 +1,8 @@
 .pagecontainer-horiz {
+    width: 100%;
+    height: 100%;
+}
+.pagecontainer-horiz > .pagecontainer-autogen {
     position: relative;
     height: 100%;
     display: -webkit-flex;
@@ -11,6 +15,10 @@
 }
 
 .pagecontainer-vert {
+    width: 100%;
+    height: 100%;
+}
+.pagecontainer-vert > .pagecontainer-autogen {
     position: relative;
     width: 100%;
 }

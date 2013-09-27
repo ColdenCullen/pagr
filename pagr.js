@@ -28,22 +28,30 @@ var pagr = (function() {
     
     function initPages()
     {
-        $( '.pagecontainer-horiz' ).each( function( index, element ) {
+        function setupPageContainer( element, sizeFunc )
+        {
+            // Get child pages
             var pages = $( element ).children( '.page' );
-            $( element ).width( ( 100 * pages.length ) + '%' );
             
+            // Generate container for pages, get it
+            var container = $( element ).append( '<div class="pagecontainer-autogen" />' ).children( '.pagecontainer-autogen' );
+            
+            // Add child pages, set container width
+            container.append( pages );
+            container[ sizeFunc ]( ( 100 * pages.length ) + '%' );
+            
+            // set page widths appropriately
             pages.each( function( index, element ) {
-                $( element ).width( ( 100 / pages.length ) + '%' );
+                $( element )[ sizeFunc ]( ( 100 / pages.length ) + '%' );
             } );
+        }
+        
+        $( '.pagecontainer-horiz' ).each( function( index, element ) {
+            setupPageContainer( element, "width" );
         } );
         
         $( '.pagecontainer-vert' ).each( function( index, element ) {
-            var pages = $( element ).children( '.page' );
-            $( element ).height( ( 100 * pages.length ) + '%' );
-            
-            pages.each( function( index, element ) {
-                $( element ).height( ( 100 / pages.length ) + '%' );
-            } );
+            setupPageContainer( element, "height" );
         } );
     }
     
@@ -108,15 +116,15 @@ var pagr = (function() {
             pageNames = pageNames.split( '/' ).filter( function( obj ) { return obj.length > 0; } );
         
         // Get page being scrolled to
-        var scrollPage = $( '[class*="pagecontainer-"] > .page#' + pageNames[ 0 ] ),
+        var scrollPage = $( '.pagecontainer-autogen > .page#' + pageNames[ 0 ] ),
             options = { };
         
         // Set which direction to scroll in, and how far to go
-        if( scrollPage.parent().hasClass( 'pagecontainer-horiz' ) )
+        if( scrollPage.parent().parent().hasClass( 'pagecontainer-horiz' ) )
         {
             options.left = -( getPageIndex( scrollPage ) * scrollPage.width() );
         }
-        else if( scrollPage.parent().hasClass( 'pagecontainer-vert' ) )
+        else if( scrollPage.parent().parent().hasClass( 'pagecontainer-vert' ) )
         {
             options.top = -( getPageIndex( scrollPage ) * scrollPage.height() );
         }
