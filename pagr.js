@@ -7,6 +7,10 @@ var pagr = (function() {
         // Init pages
         initPages();
         
+        // Init config
+        if( typeof config === "undefined" )
+            config = { };
+            
         // Set default config values
         initConfig( config );
         
