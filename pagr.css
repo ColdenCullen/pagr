@@ -5,8 +5,13 @@
 .pagecontainer-horiz > .pagecontainer-autogen {
     position: relative;
     height: 100%;
+    position: relative;
+    height: 100%;
+    display: -webkit-box;
+    display: -moz-box;
     display: -webkit-flex;
-    display: -mox-flex;
+    display: -ms-flexbox;
+    display: box;
     display: flex;
 }
 .pagecontainer-horiz > .page {

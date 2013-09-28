@@ -4,9 +4,6 @@
 var pagr = (function() {
     function init( config )
     {
-        // Init pages
-        initPages();
-        
         // Init config
         if( typeof config === "undefined" )
             config = { };
@@ -14,19 +11,26 @@ var pagr = (function() {
         // Set default config values
         initConfig( config );
         
+        // Init pages
+        initPages( config );
+        
+        // Scroll to initial page
+        initialScroll( config );
+        
         // Init links
         $( '.' + config.linkName ).click( function( event ) {
             event.preventDefault();
             goToPage( $( event.target ).attr( 'href' ), config );
         } );
         
+        // On back/forward, scroll to new page
         window.onpopstate = function( event ) {
             if( event.state )
                 scrollToPage( event.state.page, config );
         };
     }
     
-    function initPages()
+    function initPages( config )
     {
         function setupPageContainer( element, sizeFunc )
         {
@@ -38,11 +42,11 @@ var pagr = (function() {
             
             // Add child pages, set container width
             container.append( pages );
-            container[ sizeFunc ]( ( 100 * pages.length ) + '%' );
+            container[ sizeFunc ]( ( config.pageSize * pages.length ) + '%' );
             
             // set page widths appropriately
             pages.each( function( index, element ) {
-                $( element )[ sizeFunc ]( ( 100 / pages.length ) + '%' );
+                $( element )[ sizeFunc ]( ( config.pageSize / pages.length ) + '%' );
             } );
         }
         
@@ -60,22 +64,29 @@ var pagr = (function() {
      */
     function initConfig( config )
     {
-        // Save time, scroll instantly, reload time
-        var time = config.scrollTime || 400;
-        
-        if( config.initialPage !== undefined )
-        {
-            config.scrollTime = 0;
-            goToPage( config.initialPage, config );
-        }
-        
-        config.scrollTime = time;
-            
         if( config.scrollEase === undefined )
             config.scrollEase = "easeOutQuad";
             
         if( config.linkName === undefined )
             config.linkName = "pagrlink";
+            
+        if( config.useHistory === undefined )
+            config.useHistory = true;
+            
+        if( config.pageSize === undefined )
+            config.pageSize = 100;
+    }
+    
+    function initialScroll( config )
+    {
+        // Save time, scroll instantly, reload time
+        if( config.initialPage !== undefined )
+        {
+            var time = config.scrollTime;
+            config.scrollTime = 0;
+            goToPage( config.initialPage, config );
+            config.scrollTime = time;
+        }
     }
     
     /**
@@ -88,7 +99,8 @@ var pagr = (function() {
             return;
         
         // Add current state to history
-        window.history.pushState( { page: pageName }, document.title, pageName );
+        if( window.history.pushState && config.useHistory )
+            window.history.pushState( { page: pageName }, document.title, pageName );
         
         // Scroll to the proper page
         scrollToPage( pageName, config );
