@@ -134,11 +134,11 @@ var pagr = (function() {
         // Set which direction to scroll in, and how far to go
         if( scrollPage.parent().parent().hasClass( 'pagecontainer-horiz' ) )
         {
-            options.left = -( getPageIndex( scrollPage ) * scrollPage.width() );
+            options.left = -( getPageIndex( scrollPage ) * scrollPage.width() * ( config.pageSize / 100 ) );
         }
         else if( scrollPage.parent().parent().hasClass( 'pagecontainer-vert' ) )
         {
-            options.top = -( getPageIndex( scrollPage ) * scrollPage.height() );
+            options.top = -( getPageIndex( scrollPage ) * scrollPage.height() * ( config.pageSize / 100 ) );
         }
         
         // Scroll to page
