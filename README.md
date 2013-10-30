@@ -9,7 +9,7 @@ Using pagr is incredibly simple; simply create a div (or section or what have yo
 To link to a page, create an `a` tag with the class you define in config (see below, or use `pagrlink`), and with an `href` of `/outerpage/innerpage`. You can scroll to as many nested pages as you'd like, but make sure you include all of the pages outside of the page you are scrolling to, just to make sure that you are scrolling to the correct page.
 
 ### To Initialize
-In your HTML page, include the css and js files. Then, in your onload function, call pagr( [config] ). Config can have any of the following values:
+In your HTML page, include the css and js files. Then, in your onload function, call `pagr( [config] )`. Config can have any of the following values:
 ```
 {
     initialPage: "/home", // [no default] Page to scroll to as soon as the page loads
