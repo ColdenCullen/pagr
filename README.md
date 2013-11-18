@@ -4,6 +4,8 @@ pagr
 A paginating CSS/JavaScript library for creating smoothly scrolling pages.
 
 ### Format
+First, make sure you're including a recent version of jQuery and jQueryUI.
+
 Using pagr is incredibly simple; simply create a div (or section or what have you), give it the class `pagecontainer-horiz` or `pagecontainer-vert`, and then add the class `page` to its direct children.
 
 To link to a page, create an `a` tag with the class you define in config (see below, or use `pagrlink`), and with an `href` of `/outerpage/innerpage`. You can scroll to as many nested pages as you'd like, but make sure you include all of the pages outside of the page you are scrolling to, just to make sure that you are scrolling to the correct page.
