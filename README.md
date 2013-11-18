@@ -17,7 +17,8 @@ In your HTML page, include the css and js files. Then, in your onload function, 
     initialPage: "/home", // [no default] Page to scroll to as soon as the page loads
     scrollTime: 0,        // [default: 400] Time in milliseconds it takes to scroll
     scrollEase: "",       // [default: easeOutQuad] Any easing listed on http://api.jqueryui.com/easings/
-    linkName: "pagrlink"  // [default: pagrlink] The class name to look for links with
+    linkName: "pagrlink", // [default: pagrlink] The class name to look for links with
+    useHistory: true      // [default: true] Whether or not to use the forward/back buttons
 }
 ```
 
